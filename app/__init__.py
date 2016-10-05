@@ -16,10 +16,10 @@ def not_found(error):
 
 # Import a module / component using its blueprint handler variable (mod_auth)
 # from app.homepage.controllers import main as main
-
+from app.home.controllers import main as main
 
 # Register blueprint(s)
-
+app.register_blueprint(main)
 # app.register_blueprint(xyz_module)
 # ..
 

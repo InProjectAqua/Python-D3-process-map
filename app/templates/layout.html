@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ASP Management System - Yokogawa</title>
+    <link rel="icon" href="http://www.yokogawa.com/public/img/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/svg.css') }}">
+
+  </head>
+  <body>
+    <div class="navbar navbar-inverse">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="javascript:void(0)">D3 Process Map</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="about.html">About</a>
+            </li>
+            <li>
+              <a href="#">Admin</a>
+            </li>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      {% block content %}{% endblock %}
+    </div>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-1.12.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap/bootstrap.min.js') }}"></script>
+    <!-- Graph library -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/d3/d3.v3.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/graph/colorbrewer.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/graph/script.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/geometry/geometry.js') }}"></script>
+    <!-- End of Graph Library -->
+  </body>
+</html>
