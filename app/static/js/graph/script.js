@@ -6,22 +6,10 @@ var graph       = {},
 
 $(function() {
     resize();
-    jsonUrl = '/mpr/read/json';
+    jsonUrl = '/read/json';
     d3.json(jsonUrl, function(data) {
         graph.data = data.data;
-//        Every 5 minutes it will call back to database get new data
-//        And update the data to the graph, also reload the graph
-//        It's better to send into 5 arrays: red, yellow, grey, border, line
-
-//        window.setInterval(function(){
-//            console.log('counting...')
-//          drawGraph();
-//        }, 15000);
         drawGraph();
-        $("#T1020A").attr('fill', '#ffff00');
-        $("#T1020A").attr('stroke', '#ffff00');
-        $("#T1020A").attr('style', 'stroke-width:5px');
-        $("#text").attr('class', 'text-color-black');
     });
 
     $(document).on('click', '.select-object', function() {
@@ -34,19 +22,6 @@ $(function() {
 
     $(window).on('resize', resize);
 });
-
-
-// Re-style the graph with color
-function reStyleGraph(data) {
-  console.log(data)
-  $.each(data, function(i, val) {
-      $("#" + i).attr('fill', '#ffff00');
-      $("#" + i).attr('stroke', '#ffff00');
-      $("#" + i).attr('style', 'stroke-width:5px');
-      $("#text" + i).attr('class', 'text-color-black');
-  });
-}
-
 
 function drawGraph() {
     $('#graph').empty();
@@ -202,11 +177,7 @@ function drawGraph() {
     graph.line = graph.svg.append('g').selectAll('.link')
         .data(graph.force.links())
       .enter().append('line')
-        .attr('class', 'link')
-        .attr('id', function(d) {
-            console.log(d);
-            return d.target.name; // Add id to link
-        });
+        .attr('class', 'link');
 
     graph.draggedThreshold = d3.scale.linear()
         .domain([0, 0.1])
@@ -289,10 +260,7 @@ function drawGraph() {
             return graph.fillColor(d.categoryKey);
         })
         .attr('width' , 120)
-        .attr('height', 30)
-        .attr('id', function(d) {
-            return d.name;  //Add ID to Rectangle
-        });
+        .attr('height', 30);
 
     graph.node.each(function(d) {
         var node  = d3.select(this),
