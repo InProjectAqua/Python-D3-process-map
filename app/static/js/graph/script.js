@@ -3,13 +3,26 @@ var graph       = {},
     highlighted = null,
     isIE        = false;
 
-
 $(function() {
     resize();
+
     jsonUrl = '/read/json';
+
+    isIE = $.browser.msie;
+
+    if ($.browser.mozilla) {
+        $('body').addClass('firefox');
+    }
+
     d3.json(jsonUrl, function(data) {
+
         graph.data = data.data;
         drawGraph();
+    });
+
+    $('#docs-close').on('click', function() {
+        deselectObject();
+        return false;
     });
 
     $(document).on('click', '.select-object', function() {
@@ -174,6 +187,54 @@ function drawGraph() {
       .enter().append('feMergeNode')
         .attr('in', String);
 
+    graph.legend = graph.svg.append('g')
+        .attr('class', 'legend')
+        .attr('x', 0)
+        .attr('y', 0)
+      .selectAll('.category')
+        .data(d3.values(graph.categories))
+      .enter().append('g')
+        .attr('class', 'category');
+
+    graph.legendConfig = {
+        rectWidth   : 12,
+        rectHeight  : 12,
+        xOffset     : -10,
+        yOffset     : 30,
+        xOffsetText : 20,
+        yOffsetText : 10,
+        lineHeight  : 15
+    };
+    graph.legendConfig.xOffsetText += graph.legendConfig.xOffset;
+    graph.legendConfig.yOffsetText += graph.legendConfig.yOffset;
+
+    graph.legend.append('rect')
+        .attr('x', graph.legendConfig.xOffset)
+        .attr('y', function(d, i) {
+            return graph.legendConfig.yOffset + i * graph.legendConfig.lineHeight;
+        })
+        .attr('height', graph.legendConfig.rectHeight)
+        .attr('width' , graph.legendConfig.rectWidth)
+        .attr('fill'  , function(d) {
+            return graph.fillColor(d.key);
+        })
+        .attr('stroke', function(d) {
+            return graph.strokeColor(d.key);
+        });
+
+    graph.legend.append('text')
+        .attr('x', graph.legendConfig.xOffsetText)
+        .attr('y', function(d, i) {
+            return graph.legendConfig.yOffsetText + i * graph.legendConfig.lineHeight;
+        })
+        .text(function(d) {
+            return d.typeName + (d.group ? ': ' + d.group : '');
+        });
+
+    $('#graph-container').on('scroll', function() {
+        graph.legend.attr('transform', 'translate(0,' + $(this).scrollTop() + ')');
+    });
+
     graph.line = graph.svg.append('g').selectAll('.link')
         .data(graph.force.links())
       .enter().append('line')
@@ -235,6 +296,7 @@ function drawGraph() {
                     clearTimeout(graph.mouseoutTimeout);
                     graph.mouseoutTimeout = null;
                 }
+                console.log('Object ' + Object.keys(d) + d['name']);
                 highlightObject(d);
             }
         })
@@ -471,7 +533,6 @@ function tick(e) {
         });
 }
 
-
 function selectObject(obj, el) {
     var node;
     if (el) {
@@ -537,7 +598,6 @@ function deselectObject(doResize) {
     highlightObject(null);
 }
 
-
 function highlightObject(obj) {
     if (obj) {
         if (obj !== highlighted) {
@@ -560,11 +620,9 @@ function highlightObject(obj) {
     }
 }
 
-
 var showingDocs       = false,
     docsClosePadding  = 8,
     desiredDocsHeight = 300;
-
 
 function resize(showDocs) {
     var docsHeight  = 0,
@@ -585,4 +643,9 @@ function resize(showDocs) {
 
     graphHeight = window.innerHeight - docsHeight;
     $graph.css('height', graphHeight + 'px');
+
+    $close.css({
+        top   : graphHeight + docsClosePadding + 'px',
+        right : window.innerWidth - $docs[0].clientWidth + docsClosePadding + 'px'
+    });
 }

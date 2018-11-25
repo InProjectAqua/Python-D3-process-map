@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>D3 Process Map</title>
+    <link rel="icon" href="http://www.yokogawa.com/public/img/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/svg.css">
+
+  </head>
+  <body>
+    <div class="navbar navbar-inverse">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="javascript:void(0)">D3 Process Map</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="about.html">About</a>
+            </li>
+            <li>
+              <a href="#">Admin</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      
+<div class="container-fluid">
+    <div class="row">
+        <div id="graph-container">
+            <div id="graph-bg"></div>
+            <div id="graph"></div>
+        </div>
+    </div>
+</div>
+
+
+    </div>
+
+    <script type="text/javascript" src="/static/js/jquery-1.12.1.min.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap/bootstrap.min.js"></script>
+    <!-- Graph library -->
+    <script type="text/javascript" src="/static/js/d3/d3.v3.min.js"></script>
+    <script type="text/javascript" src="/static/js/graph/colorbrewer.js"></script>
+    <script type="text/javascript">
+    var config = {u'graph': {u'labelPadding': {u'top': 2, u'right': 3, u'bottom': 2, u'left': 3}, u'numColors': 12, u'height': 800, u'charge': -400, u'labelMargin': {u'top': 2, u'right': 3, u'bottom': 2, u'left': 3}, u'linkDistance': 100, u'ticksWithoutCollisions': 50}, u'constraints': [{u'y': 0.2, u'x': 0.2, u'has': {u'type': u'group1'}, u'type': u'position', u'weight': 0.7}, {u'y': 0.2, u'x': 0.8, u'has': {u'type': u'group2'}, u'type': u'position', u'weight': 0.7}, {u'y': 0.5, u'x': 0.2, u'has': {u'type': u'group3'}, u'type': u'position', u'weight': 0.7}, {u'y': 0.5, u'x': 0.8, u'has': {u'type': u'group4'}, u'type': u'position', u'weight': 0.7}, {u'y': 0.8, u'x': 0.2, u'has': {u'type': u'group5'}, u'type': u'position', u'weight': 0.7}, {u'y': 0.9, u'x': 0.8, u'has': {u'type': u'group8'}, u'type': u'position', u'weight': 0.7}], u'types': {u'group10': {u'short': u'Group 10', u'long': u'Group 10 long name for docs'}, u'group5': {u'short': u'Group 5', u'long': u'Group 5 long name for docs'}, u'group4': {u'short': u'Group 4', u'long': u'Group 4 long name for docs'}, u'group7': {u'short': u'Group 7', u'long': u'Group 7 long name for docs'}, u'group6': {u'short': u'Group 6', u'long': u'Group 6 long name for docs'}, u'group1': {u'short': u'Group 1', u'long': u'Group 1 long name for docs'}, u'group0': {u'short': u'Group 0', u'long': u'Group 0 long name for docs'}, u'group3': {u'short': u'Group 3', u'long': u'Group 3 long name for docs'}, u'group2': {u'short': u'Group 2', u'long': u'Group 2 long name for docs'}, u'group9': {u'short': u'Group 9', u'long': u'Group 9 long name for docs'}, u'group8': {u'short': u'Group 8', u'long': u'Group 8 long name for docs'}}, u'title': u'Yokogawa Early Event Prediction'};
+</script>
+    <script type="text/javascript" src="/static/js/graph/script.js?version=12052017"></script>
+    <script type="text/javascript" src="/static/js/geometry/geometry.js"></script>
+    <!-- End of Graph Library -->
+  </body>
+</html>
