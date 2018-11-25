@@ -26,8 +26,8 @@ marker#end {
 
 .node text {
     /*fill: #B7BCBF;*/
-    fill: white;
-    font: 16px lato;
+    fill: #000;
+    font: 10px sans-serif;
     pointer-events: none;
 }
 
